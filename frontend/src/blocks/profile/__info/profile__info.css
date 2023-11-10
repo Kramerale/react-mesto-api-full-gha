@@ -1,0 +1,20 @@
+.profile__info {
+  display: grid;
+  grid-template-columns: 294px 1fr;
+  grid-template-areas: "profile__name profile__edit-button"
+  "profile__occupation .";
+  align-items: center;
+  align-content: center;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .profile__info {
+    max-width: 282px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "profile__name profile__edit-button"
+    "profile__occupation profile__occupation";
+    text-align: center;
+    gap: 14px 10px;
+  }
+}

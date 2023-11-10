@@ -1,0 +1,25 @@
+.login__input {
+  color: rgba(255, 255, 255, 1);
+  border: 0;
+  border-bottom: 2px solid rgba(204, 204, 204, 1);
+  background-color: transparent;
+  padding: 0 0 13px;
+  margin-bottom: 30px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.login__input:last-of-type {
+  margin-bottom: 216px;
+}
+
+.login__input::placeholder {
+  color: rgba(204, 204, 204, 1);
+}
+
+@media (max-width: 520px) {
+  .login__input:last-of-type {
+    margin-bottom: 173px;
+  }
+}

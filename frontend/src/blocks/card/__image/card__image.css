@@ -1,0 +1,9 @@
+.card__image {
+  background: #000000;
+  cursor: pointer;
+  box-sizing: border-box;
+  border-radius: 10px 10px 0 0;
+  display: block;
+  width: 282px;
+  height: 282px;
+}

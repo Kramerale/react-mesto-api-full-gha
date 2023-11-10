@@ -1,0 +1,9 @@
+.card__description {
+  max-width: 246px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-radius: 10px;
+  padding: 25px 15px 22px 21px;
+  background-color: #FFFFFF;
+}
