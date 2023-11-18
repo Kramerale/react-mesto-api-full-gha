@@ -28,7 +28,7 @@ function Register (props) {
         <input className="register__input" name="password" type="password" placeholder="Пароль" onChange={handleChange} required/>
         <button className="register__submit-button" type="submit">Зарегистрироваться</button>
       </form>
-      <p className="register__text">Уже зарегистрированы? <Link to="/sign-in" className="register__link">Войти</Link></p>
+      <p className="register__text">Уже зарегистрированы? <Link to="/signin" className="register__link">Войти</Link></p>
     </section>
   )
 }

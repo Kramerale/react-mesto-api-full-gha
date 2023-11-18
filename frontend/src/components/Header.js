@@ -11,19 +11,19 @@ function Header (props) {
           <Route path="/" element={
             <nav className="header__nav">
               <p className="header__nav-email">{props.email}</p>
-              <Link to="/sign-in" className="header__nav-link" onClick={props.onClick}>Выйти</Link>
+              <Link to="/signin" className="header__nav-link" onClick={props.onClick}>Выйти</Link>
             </nav>
           }/>
 
-          <Route path="/sign-in" element={
+          <Route path="/signin" element={
             <nav className="header__nav">
-              <Link to="/sign-up" className="header__nav-link">Регистрация</Link>
+              <Link to="/signup" className="header__nav-link">Регистрация</Link>
             </nav>
           }/>
 
-          <Route path="/sign-up" element={
+          <Route path="/signup" element={
             <nav className="header__nav">
-              <Link to="/sign-in" className="header__nav-link">Войти</Link>
+              <Link to="/signin" className="header__nav-link">Войти</Link>
             </nav>
           }/>
         </Routes>

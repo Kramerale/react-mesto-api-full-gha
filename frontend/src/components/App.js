@@ -33,19 +33,38 @@ function App() {
 
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    auth.getToken(jwt)
+    .then(data => {
+      if (data) {
+        setIsLoggedIn(true);
+        setEmail(data.email);
+        navigate("/");
+      } else {
+        setIsLoggedIn(false);
+      }
+    })
+    .catch((err) => {
+      setIsLoggedIn(false);
+      console.error(err);
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   function handleRegisterSubmit (email, password) {
     auth.register(email, password)
     .then(() => {
       setInfoImage(resolve);
       setInfoMessage("Вы успешно зарегистрировались!");
       setAriaLabel("Попап, информирующий о статусе регистрации");
-      navigate('/sign-in');
+      navigate('/signin');
     })
     .catch((err) => {
       setInfoImage(reject);
       setInfoMessage("Что-то пошло не так! Попробуйте ещё раз.");
       setAriaLabel("Попап, информирующий о статусе регистрации");
-      navigate('/sign-up');
+      navigate('/signup');
       console.error(err);
     })
     .finally(handleInfoTooltip)
@@ -55,6 +74,7 @@ function App() {
     auth.authorize(email, password)
     .then((data) => {
       localStorage.setItem("jwt", data.token);
+      setIsLoggedIn(true);
       setEmail(email);
       navigate('/');
     })
@@ -62,32 +82,11 @@ function App() {
       setInfoImage(reject);
       setInfoMessage("Что-то пошло не так! Попробуйте ещё раз.");
       setAriaLabel("Попап, информирующий о статусе регистрации");
-      navigate('/sign-in');
+      navigate('/signin');
       handleInfoTooltip();
       console.error(err);
     })
   }
-
-  function checkToken () {
-    const jwt = localStorage.getItem("jwt");
-    auth.getToken(jwt)
-    .then(data => {
-      if (!data) {
-        return;
-      }
-      setIsLoggedIn(true);
-      setEmail(data.data.email);
-      navigate("/");
-    })
-    .catch((err) => {
-      setIsLoggedIn(false);
-      console.error(err);
-    })
-  }
-
-  React.useEffect(() => {
-    checkToken();
-  }, [])
 
   React.useEffect(() => {
     if (isLoggedIn) {
@@ -122,7 +121,7 @@ function App() {
   }
 
   function handleCardLike (card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     if(!isLiked) {
       api.addCardLike(card._id)
@@ -186,7 +185,7 @@ function App() {
     localStorage.removeItem("jwt");
     setEmail("");
     setIsLoggedIn(false);
-    navigate("/sign-in");
+    navigate("/signin");
   }
 
   return (
@@ -211,18 +210,18 @@ function App() {
             </>
           }/>
 
-          <Route path="/sign-in" element={
+          <Route path="/signin" element={
             <Login
               handleLogin={() => setIsLoggedIn(true)}
               onLogin = {handleLoginSubmit}
             />
           }/>
 
-          <Route path="sign-up" element={
+          <Route path="signup" element={
             <Register onRegister = {handleRegisterSubmit}/>
           }/>
 
-          <Route path="*" element={<Navigate to={isLoggedIn ? "/" : "/sign-in"}/>} />
+          <Route path="*" element={<Navigate to={isLoggedIn ? "/" : "/signin"}/>} />
         </Routes>
 
         <EditProfilePopup
