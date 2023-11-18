@@ -35,20 +35,22 @@ function App() {
 
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
-    auth.getToken(jwt)
-    .then(data => {
-      if (data) {
-        setIsLoggedIn(true);
-        setEmail(data.email);
-        navigate("/");
-      } else {
+    if (jwt) {
+      auth.getToken(jwt)
+      .then(data => {
+        if (data) {
+          setIsLoggedIn(true);
+          setEmail(data.email);
+          navigate("/");
+        } else {
+          setIsLoggedIn(false);
+        }
+      })
+      .catch((err) => {
         setIsLoggedIn(false);
-      }
-    })
-    .catch((err) => {
-      setIsLoggedIn(false);
-      console.error(err);
-    })
+        console.error(err);
+      })
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -184,6 +186,8 @@ function App() {
   function signOut () {
     localStorage.removeItem("jwt");
     setEmail("");
+    setCurrentUser({});
+    setCards([]);
     setIsLoggedIn(false);
     navigate("/signin");
   }
@@ -211,10 +215,7 @@ function App() {
           }/>
 
           <Route path="/signin" element={
-            <Login
-              handleLogin={() => setIsLoggedIn(true)}
-              onLogin = {handleLoginSubmit}
-            />
+            <Login onLogin = {handleLoginSubmit}/>
           }/>
 
           <Route path="signup" element={
