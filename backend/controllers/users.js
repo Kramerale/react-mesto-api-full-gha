@@ -7,6 +7,8 @@ const ConflictError = require('../utils/ConflictError');
 
 const userModel = require('../models/user');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const createUser = (req, res, next) => {
   const {
     name, about, avatar, email,
@@ -139,7 +141,7 @@ const login = (req, res, next) => {
 
   return userModel.findUserByCredentials(email, password)
   .then((user) => {
-    const token = jwt.sign({ _id: user._id }, 'some-secret-key', { expiresIn: '7d' });
+    const token = jwt.sign({ _id: user._id }, `${NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key'}`, { expiresIn: '7d' });
 
     res.send({ token });
   })
