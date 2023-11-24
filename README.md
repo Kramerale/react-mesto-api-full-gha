@@ -7,7 +7,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.86.243
+IP 51.250.86.243
 
 Frontend https://kramerale.nomoredomainsmonster.ru
 
