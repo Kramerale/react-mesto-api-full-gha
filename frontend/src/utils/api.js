@@ -116,8 +116,8 @@ class Api {
 }
 
 const api = new Api({
-  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-70',
-  baseUrl: 'http://localhost:4000',
+  baseUrl: 'https://api.kramerale.nomoredomainsmonster.ru',
+  // baseUrl: 'http://localhost:4000',
   // headers: {
   //   authorization: '8fe60504-aa52-4743-868a-71782c18b288',
   //   'Content-Type': 'application/json'
