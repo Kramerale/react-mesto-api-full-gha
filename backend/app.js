@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 // }));
 
 app.use(cors({
-  origin: 'https://api.kramerale.nomoredomainsmonster.ru',
+  origin: 'https://kramerale.nomoredomainsmonster.ru',
 }));
 
 app.use(requestLogger);
